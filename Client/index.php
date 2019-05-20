@@ -9,28 +9,18 @@
 			$get = GET();
 			$post = "";
 			$put = "";
-			$delete = "";
 		}
 		else if($_POST['botao'] == "post") {
 			// POST
 			$post = POST();
 			$get = "";
 			$put = "";
-			$delete = "";
 		}
 		else if($_POST['botao'] == "put") {
 			// PUT
 			$put = PUT();
 			$get = "";
 			$post = "";
-			$delete = "";
-		}
-		else if($_POST['botao'] == "delete") {
-			// DELETE
-			$delete = DELETE();
-			$get = "";
-			$post = "";
-			$put = "";
 		}
     }
 	else {
@@ -59,7 +49,13 @@
     <link href="bs/themes/signin.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+		<script>
+    $(document).ready(function () { 
+        var $seuCampoCpf = $("#CPF");
+        $seuCampoCpf.mask('000.000.000-00', {reverse: true});
+    });
+</script>
   </head>
 
   <body role="document">
@@ -106,7 +102,7 @@
 					<input type="name" class="form-control" name="usuario"  maxlength="255">
 					<br>
 					<label>Senha</label>
-					<input type="password" class="form-control" name="password"  maxlength="255">
+					<input type="password" class="form-control" name="password1"  maxlength="255">
 					<br>
 					<button type="submit" name="botao" value="post" class="btn btn-success btn-block">
 						<b>Confirmar|Cadastrar</b>
@@ -128,10 +124,10 @@
 					<br>
 					<!-- Dados de login -->
 					<label>Usuário</label>
-					<input type="text" class="form-control" name="user" maxlength="40">
+					<input type="name" class="form-control" name="usuario2" maxlength="40">
 					<br>
 					<label>Senha</label>
-					<input type="password" class="form-control" name="password" maxlength="40">
+					<input type="password" class="form-control" name="password2" maxlength="40">
 					<br>
 					<button type="submit" name="botao" value="get" class="btn btn-primary btn-block">
 						<b>Confirmar|Autenticar</b>
@@ -162,17 +158,12 @@
 				<div class='col-sm-3'>
 					<h3>Validar CPF</h3>
 					<br>
-					<!-- ID -->
 					<label>CPF</label>
-					<input type="number" class="form-control" name="id_put" maxlength="5">
+					<input type="text" class="form-control" name="CPF" id="CPF" maxlength="14">
 					<br>
 					<button type="submit" name="botao" value="put" class="btn btn-warning btn-block">
-						<b>PUT (Alterar)</b>
+						<b>Comfirmar|Validar</b>
 					</button>
-					<!-- Nome -->
-					<!-- <label>Produto</label>
-					<input type="text" class="form-control" name="nome_put" maxlength="40">
-					<br> -->
 					<?php
 						if($put != "") {
 							echo "<div class='alert alert-success' role='alert'>";
@@ -183,32 +174,11 @@
 						}
 					?>
 				</div>
-
-				<!-- DELETE -->
-				<div class='col-sm-3'>
-					<button type="submit" name="botao" value="delete" class="btn btn-danger btn-block">
-						<b>DELETE (Remover)</b>
-					</button>
-					<br>
-					<!-- ID -->
-					<label>ID</label>
-					<input type="text" class="form-control" name="id_delete" maxlength="5">
-					<br>
-					<?php
-						if($delete != "") {
-							echo "<div class='alert alert-success' role='alert'>";
-								$dadoJson = json_decode($delete);
-								$msg = $dadoJson->{'msg'};
-			   					echo "<strong>Retorno do Web Service!</strong><br>$msg";
-			 				echo "</div>";
-						}
-					?>
-				</div>
 			</div>
 		</form>
 
 		<div class="page-header">
-			<b>&copy;2018&nbsp;&nbsp;&raquo;&nbsp;&nbsp; Gil Eduardo de Andrade</b>
+			<b>&copy;2018&nbsp;&nbsp;&raquo;&nbsp;&nbsp; Josepher Jose Castro da Silva</b>
 		</div>
     </div> <!-- /container -->
 
