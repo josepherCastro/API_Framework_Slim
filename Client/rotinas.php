@@ -13,13 +13,11 @@
 		 	return json_encode( array('msg' => '[ERRO] Preencha o Campo de Entrada!') );
 		}
 
-		// MONTA ARRAY DE DADOS
-		$dados = array(	'login' => mb_strtoupper($_POST['usuario2'], 'UTF-8'),
-						'senha' => mb_strtoupper($_POST['password2'], 'UTF-8'));
-		
-
 		// INICIALIZA/CONFIGURA CURL
-		$curl = curl_init("http://localhost/API_Framework_Slim/rest.php/".json_encode($dados));
+		$curl = curl_init("http://localhost/API_Framework_Slim/rest.php/user/"
+							.mb_strtoupper($_POST['usuario2'], 'UTF-8')."/"
+							.mb_strtoupper($_POST['password2'], 'UTF-8'));
+							
 		// CONFIGURA AS OPÇÕES (parâmetros)
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		// INVOCA A URL DO WEBSERVICE
@@ -33,13 +31,13 @@
 	function POST() {
 
 		// DADO DE ENTRADA VAZIO - ERRO
-		if(($_POST['nome'] || $_POST['usuario'] || $_POST['password1']) == "") {
+		if(($_POST['name1'] == "")||($_POST['usuario1'] == "")||($_POST['password1'] == "")) {
 			return json_encode( array('msg' => '[ERRO] Preencha o Campo de Entrada!') );
 		}
 
 		// MONTA ARRAY DE DADOS
-		$dados = array('nome' => mb_strtoupper($_POST['name'], 'UTF-8'), 
-						'login' => mb_strtoupper($_POST['usuario'], 'UTF-8'),
+		$dados = array('nome' => mb_strtoupper($_POST['name1'], 'UTF-8'), 
+						'login' => mb_strtoupper($_POST['usuario1'], 'UTF-8'),
 						'senha' => mb_strtoupper($_POST['password1'], 'UTF-8'));
 
 		// INICIALIZA/CONFIGURA CURL

@@ -96,10 +96,10 @@
 					<br>
 					<!-- Número de Registros -->
 					<label>Nome</label>
-					<input type="name" class="form-control" name="name"  maxlength="255">
+					<input type="name" class="form-control" name="name1"  maxlength="255">
 					<br>
 					<label>Usuário</label>
-					<input type="name" class="form-control" name="usuario"  maxlength="255">
+					<input type="name" class="form-control" name="usuario1"  maxlength="255">
 					<br>
 					<label>Senha</label>
 					<input type="password" class="form-control" name="password1"  maxlength="255">
@@ -141,11 +141,11 @@
 								echo "<strong>Retorno do Web Service!</strong>";
 
 								if($dadoJson->msg != "") {
-									echo "<br>$dadoJson->msg";
+									echo "<br>[ERRO] $dadoJson->msg <br>Usuario ou senha incorreto!";
 								}
 								else {
 									foreach ($dadoJson as $dado) {
-				   						echo "<br>($dado->id) $dado->nome";
+											echo "<br>[OK] Autenticado com sucesso!<br> $dado->nome";
 									}
 								}
 
@@ -178,7 +178,7 @@
 		</form>
 
 		<div class="page-header">
-			<b>&copy;2018&nbsp;&nbsp;&raquo;&nbsp;&nbsp; Josepher Jose Castro da Silva</b>
+			<b>&copy;2019&nbsp;&nbsp;&raquo;&nbsp;&nbsp; Josepher Jose Castro da Silva</b>
 		</div>
     </div> <!-- /container -->
 

@@ -18,29 +18,26 @@
 	});
 
 	// GET - Selecionar
-	$app->get('/:dados', function($dados) {
-		
-		$dadoJson = json_decode( $dados );
-		$user = $dadoJson->nome;
-		$password = $dadoJson->senha;
+	// $app->get('/logar/:dados', function($dados) {
+	// 	$dadoJson = json_decode( $dados );
+	// 	$conn = getConn();
+	// 	$sql = "SELECT * FROM usuario WHERE login = :login AND senha = :senha";
+	// 	$stmt = $conn->prepare($sql);
+	// 	$stmt->bindParam("login", $dadoJson->usuario);
+	// 	$stmt->bindParam("senha", $dadoJson->senha);
+	// 	$stmt->execute();
+	// 	echo json_encode($stmt->fetchAll());
+	// });
 
-		print_r("$dadoJson");
+	// GET - Selecionar
+	$app->get('/user/:login/:senha', function($login, $senha) {
 		$conn = getConn();
-		$sql = "SELECT * FROM usuario WHERE login = ':login' AND senha = ':senha' LIMIT 1";
+		$sql = "SELECT * FROM usuario WHERE login = :login AND senha = :senha";
 		$stmt = $conn->prepare($sql);
-		$stmt->bindParam("usuario", $user);
-		$stmt->bindParam("senha", $password);
+		$stmt->bindParam("login", $login);
+		$stmt->bindParam("senha", $senha);
 		$stmt->execute();
-		$dadoJson = $stmt->fetchAll();
-		
-		if(empty($dadoJson)){
-			echo json_encode(array('msg' => "[ERRO] Usuário ou Senha incorretos!"));
-		}
-		else {
-			echo json_encode(array('msg' => "[OK] Usuário ($user) Logado!"));
-		}
-
-		 echo json_encode($stmt->fetchAll());
+		echo json_encode($stmt->fetchAll());
 	});
 
 	// POST - Inserir
@@ -56,7 +53,7 @@
 		$stmt->execute();
 		$id = $conn->lastInsertId();
 
-		echo json_encode( array('msg' => "[OK] Produto ($id) Cadastro com Sucesso!") );
+		echo json_encode( array('msg' => "[OK 4] Cadastrado efetuado com Sucesso!") );
 	});
 
 	// PUT - Alterar
@@ -70,6 +67,6 @@
 			echo json_encode( array('msg' => "[ERRO] ($dadoJson->cpf) CPF Inválido!") );
 		}
 	});
-
+	
 	$app->run();
 ?>
